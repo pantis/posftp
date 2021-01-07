@@ -6,6 +6,9 @@ int main(int argc, char *argv[]) {
     cout << "Welcome!" << endl;
     cout << "Type help for help :)" << endl;
     ftp.login("","", argv[1], atoi(argv[2]));
+    ftp.pwd();
+    ftp.quit();
+
     return 0;
 }
 

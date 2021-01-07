@@ -26,6 +26,8 @@ public:
     void send_request(int sock, const char* command);
     void get_reply(int sock);
     void login(const char* username, const char* password, const char *server_ip_add, const unsigned int server_port);
+    void quit();
+    void pwd();
 
 private:
     int sock_conn;

@@ -56,9 +56,10 @@ void ftpclient::login(const char *username, const char *password, const char *se
 
     get_reply(sock_conn);
 
-    send_request(sock_conn, "XPWD\r\n");
+//    send_request(sock_conn, "XPWD\r\n");
+//
+//    get_reply(sock_conn);
 
-    get_reply(sock_conn);
 }
 
 void ftpclient::send_request(int sock, const char* command) {
@@ -77,4 +78,15 @@ ftpclient::ftpclient() {
 }
 
 ftpclient::~ftpclient() {
+}
+
+void ftpclient::quit() {
+    send_request(sock_conn, "QUIT\r\n");
+    get_reply(sock_conn);
+    close(sock_conn);
+}
+
+void ftpclient::pwd() {
+    send_request(sock_conn, "PWD\r\n");
+    get_reply(sock_conn);
 }
