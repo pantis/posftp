@@ -15,6 +15,7 @@
 
 #ifndef POSFTP_FTPCLIENT_H
 #define POSFTP_FTPCLIENT_H
+#define SIZEOFBUFFER 1024
 
 using namespace std;
 
@@ -25,16 +26,14 @@ public:
     void socket_create(int &sock, const char* server_ip_add, const unsigned int server_port);
     void send_request(int sock, const char* command);
     void get_reply(int sock);
-    void login(const char* username, const char* password, const char *server_ip_add, const unsigned int server_port);
+    void login(const char *server_ip_add, const unsigned int server_port);
     void quit();
     void pwd();
-
 private:
     int sock_conn;
     int sock_data;
     char buffer[1024];
     char reply_msg[1024];
-    const int sizeOfBuffers = 1024;
 };
 
 

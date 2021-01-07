@@ -43,41 +43,41 @@ void ftpclient::get_reply(int sock) {
         cout << "Receive failed" << endl;
     }
     cout << reply_msg << endl;
-    bzero(reply_msg, sizeOfBuffers);
+    bzero(reply_msg, SIZEOFBUFFER);
 }
 
-void ftpclient::login(const char *username, const char *password, const char *server_ip_add, const unsigned int server_port) {
+void ftpclient::login(const char *server_ip_add, const unsigned int server_port) {
+
+    char usrCmd[SIZEOFBUFFER];
+    char passCmd[SIZEOFBUFFER];
+    char username[1024] = "";
+    char password[1024] = "";
 
     socket_create(sock_conn, server_ip_add, server_port);
 
     get_reply(sock_conn);
 
-    send_request(sock_conn, "USER anonymous\n");
+    cout << "Enter your username: ";
+    cin >> username;
+    strcpy(usrCmd, "USER ");
+    strcat(usrCmd, username);
+    strcat(usrCmd, "\r\n");
+
+    send_request(sock_conn, usrCmd);
 
     get_reply(sock_conn);
 
-//    send_request(sock_conn, "XPWD\r\n");
-//
-//    get_reply(sock_conn);
+    if (strcmp(username, "anonymous") != 0) {
+        cout << "Enter your password: ";
+        cin >> password;
+        strcpy(passCmd, "PASS ");
+        strcat(passCmd, password);
+        strcat(passCmd, "\r\n");
 
-}
+        send_request(sock_conn, passCmd);
 
-void ftpclient::send_request(int sock, const char* command) {
-    int req_length;
-    strcpy(buffer, command);
-    req_length = send(sock, buffer, strlen(command), 0);
-    if( req_length < 0 ) {
-        cout << "Send failed" << endl;
+        get_reply(sock_conn);
     }
-    bzero(buffer, sizeOfBuffers);
-}
-
-ftpclient::ftpclient() {
-    sock_conn = 0;
-    sock_data = 0;
-}
-
-ftpclient::~ftpclient() {
 }
 
 void ftpclient::quit() {
@@ -90,3 +90,23 @@ void ftpclient::pwd() {
     send_request(sock_conn, "PWD\r\n");
     get_reply(sock_conn);
 }
+
+
+void ftpclient::send_request(int sock, const char* command) {
+    int req_length;
+    strcpy(buffer, command);
+    req_length = send(sock, buffer, strlen(command), 0);
+    if( req_length < 0 ) {
+        cout << "Send failed" << endl;
+    }
+    bzero(buffer, SIZEOFBUFFER);
+}
+
+ftpclient::ftpclient() {
+    sock_conn = 0;
+    sock_data = 0;
+}
+
+ftpclient::~ftpclient() {
+}
+
