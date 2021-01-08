@@ -91,7 +91,6 @@ void ftpclient::pwd() {
     get_reply(sock_conn);
 }
 
-
 void ftpclient::send_request(int sock, const char* command) {
     int req_length;
     strcpy(buffer, command);
@@ -141,13 +140,8 @@ void ftpclient::cd(char *command) {
     get_reply(sock_conn);
 }
 
-
-
 ftpclient::ftpclient() {
 }
 
 ftpclient::~ftpclient() {
 }
-
-
-

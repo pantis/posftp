@@ -16,7 +16,6 @@ int main(int argc, char *argv[]) {
             bzero(command, SIZEOFBUFFER);
         } else if (strcmp(command, "cd") == 0) {
             bzero(command, SIZEOFBUFFER);
-            cout << "Enter directory: ";
             cin >> command;
             ftp.cd(command);
             bzero(command, SIZEOFBUFFER);
