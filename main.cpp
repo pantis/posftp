@@ -14,13 +14,24 @@ int main(int argc, char *argv[]) {
         if (strcmp(command, "pwd") == 0) {
             ftp.pwd();
             bzero(command, SIZEOFBUFFER);
+        } else if (strcmp(command, "!pwd") == 0) {
+            system("pwd");
+            bzero(command, SIZEOFBUFFER);
         } else if (strcmp(command, "cd") == 0) {
             bzero(command, SIZEOFBUFFER);
             cin >> command;
             ftp.cd(command);
             bzero(command, SIZEOFBUFFER);
+        } else if (strcmp(command, "!cd") == 0) {
+            bzero(command, SIZEOFBUFFER);
+            cin >> command;
+            chdir(command);
+            bzero(command, SIZEOFBUFFER);
         } else if (strcmp(command, "ls") == 0) {
             ftp.ls();
+            bzero(command, SIZEOFBUFFER);
+        } else if (strcmp(command, "!ls") == 0) {
+            system("ls");
             bzero(command, SIZEOFBUFFER);
         } else if (strcmp(command, "quit") == 0) {
             ftp.quit();
