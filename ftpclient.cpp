@@ -140,8 +140,20 @@ void ftpclient::cd(char *command) {
     get_reply(sock_conn);
 }
 
+void ftpclient::mkdir(char *directory) {
+    char cmd[SIZEOFBUFFER];
+    strcpy(cmd, "XMKD ");
+    strcat(cmd, directory);
+    strcat(cmd, "\r\n");
+
+    send_request(sock_conn, cmd);
+
+    get_reply(sock_conn);
+}
+
 ftpclient::ftpclient() {
 }
 
 ftpclient::~ftpclient() {
 }
+

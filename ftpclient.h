@@ -32,6 +32,7 @@ public:
     void pasvMode(char* ip_add, int* port);
     void ls();
     void cd(char* command);
+    void mkdir(char* directory);
 private:
     int sock_conn;
     int sock_data;
