@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
             cin >> command;
             ftp.dele(command);
             bzero(command, SIZEOFBUFFER);
-        } else if (strcmp(command, "!delete") == 0) {
+        } else if (strcmp(command, "!rm") == 0) {
             bzero(command, SIZEOFBUFFER);
             cin >> directory;
             strcpy(command, "rm ");
@@ -68,13 +68,22 @@ int main(int argc, char *argv[]) {
             system(command);
             bzero(command, SIZEOFBUFFER);
         }  else if (strcmp(command, "!touch") == 0) {
-                bzero(command, SIZEOFBUFFER);
-                cin >> directory;
-                strcpy(command, "touch ");
-                strcat(command, directory);
-                system(command);
-                bzero(command, SIZEOFBUFFER);
-
+            bzero(command, SIZEOFBUFFER);
+            cin >> directory;
+            strcpy(command, "touch ");
+            strcat(command, directory);
+            system(command);
+            bzero(command, SIZEOFBUFFER);
+        } else if (strcmp(command, "put") == 0) {
+            bzero(command, SIZEOFBUFFER);
+            cin >> command;
+            ftp.put(command);
+            bzero(command, SIZEOFBUFFER);
+        } else if (strcmp(command, "get") == 0) {
+            bzero(command, SIZEOFBUFFER);
+            cin >> command;
+            ftp.get(command);
+            bzero(command, SIZEOFBUFFER);
         } else if (strcmp(command, "quit") == 0) {
             ftp.quit();
             exit(0);

@@ -12,6 +12,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <iostream>
+#include <fstream>
 
 #ifndef POSFTP_FTPCLIENT_H
 #define POSFTP_FTPCLIENT_H
@@ -35,6 +36,10 @@ public:
     void mkdir(char* directory);
     void rmdir(char *directory);
     void dele(char *directory);
+    void put(char *file);
+    void get(char *file);
+    void send_file(int sock,  char *file);
+    void recieve_file(int sock);
 private:
     int sock_conn;
     int sock_data;
