@@ -29,6 +29,9 @@ public:
     void login(const char *server_ip_add, const unsigned int server_port);
     void quit();
     void pwd();
+    void pasvMode(char* ip_add, int* port);
+    void ls();
+    void cd(char* command);
 private:
     int sock_conn;
     int sock_data;

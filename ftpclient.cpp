@@ -37,13 +37,13 @@ void ftpclient::socket_create(int &sock, const char *server_ip_add, const unsign
 
 
 void ftpclient::get_reply(int sock) {
+    bzero(reply_msg, SIZEOFBUFFER);
     int rep_length;
     rep_length = recv(sock, reply_msg, 1024, 0);
     if( rep_length < 0 ) {
         cout << "Receive failed" << endl;
     }
     cout << reply_msg << endl;
-    bzero(reply_msg, SIZEOFBUFFER);
 }
 
 void ftpclient::login(const char *server_ip_add, const unsigned int server_port) {
@@ -102,11 +102,52 @@ void ftpclient::send_request(int sock, const char* command) {
     bzero(buffer, SIZEOFBUFFER);
 }
 
+void ftpclient::pasvMode(char *ip_add, int *port) {
+    unsigned int ip1,ip2,ip3,ip4;
+    unsigned int prt1,prt2;
+    char *parse;
+    send_request(sock_conn, "PASV\r\n");
+    get_reply(sock_conn);
+    parse = strrchr(reply_msg, '(');
+    sscanf(parse, "(%d,%d,%d,%d,%d,%d)", &ip1, &ip2, &ip3, &ip4, &prt1, &prt2);
+    sprintf(ip_add, "%d.%d.%d.%d", ip1, ip2, ip3, ip4);
+    *port = prt1 * 256 + prt2;
+}
+
+void ftpclient::ls() {
+    char ip_add[32];
+    int port;
+    pasvMode(ip_add, &port);
+
+    socket_create(sock_data, ip_add, port);
+
+    send_request(sock_conn, "NLST\r\n");
+
+    get_reply(sock_conn);
+
+    get_reply(sock_data);
+
+    get_reply(sock_conn);
+}
+
+void ftpclient::cd(char *command) {
+    char cmd[SIZEOFBUFFER];
+    strcpy(cmd, "CWD ");
+    strcat(cmd, command);
+    strcat(cmd, "\r\n");
+
+    send_request(sock_conn, cmd);
+
+    get_reply(sock_conn);
+}
+
+
+
 ftpclient::ftpclient() {
-    sock_conn = 0;
-    sock_data = 0;
 }
 
 ftpclient::~ftpclient() {
 }
+
+
 
