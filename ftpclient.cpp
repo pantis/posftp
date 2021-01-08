@@ -163,12 +163,25 @@ void ftpclient::rmdir(char *directory) {
 
 }
 
+void ftpclient::dele(char *directory) {
+    char cmd[SIZEOFBUFFER];
+    strcpy(cmd, "DELE ");
+    strcat(cmd, directory);
+    strcat(cmd, "\r\n");
+
+    send_request(sock_conn, cmd);
+
+    get_reply(sock_conn);
+
+}
 
 ftpclient::ftpclient() {
 }
 
 ftpclient::~ftpclient() {
 }
+
+
 
 
 

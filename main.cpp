@@ -45,18 +45,35 @@ int main(int argc, char *argv[]) {
             strcat(command, directory);
             system(command);
             bzero(command, SIZEOFBUFFER);
-
         } else if (strcmp(command, "rmdir") == 0) {
             bzero(command, SIZEOFBUFFER);
             cin >> command;
             ftp.rmdir(command);
             bzero(command, SIZEOFBUFFER);
-
         } else if (strcmp(command, "!rmdir") == 0) {
             bzero(command, SIZEOFBUFFER);
             cin >> command;
             rmdir(command);
             bzero(command, SIZEOFBUFFER);
+        } else if (strcmp(command, "delete") == 0) {
+            bzero(command, SIZEOFBUFFER);
+            cin >> command;
+            ftp.dele(command);
+            bzero(command, SIZEOFBUFFER);
+        } else if (strcmp(command, "!delete") == 0) {
+            bzero(command, SIZEOFBUFFER);
+            cin >> directory;
+            strcpy(command, "rm ");
+            strcat(command, directory);
+            system(command);
+            bzero(command, SIZEOFBUFFER);
+        }  else if (strcmp(command, "!touch") == 0) {
+                bzero(command, SIZEOFBUFFER);
+                cin >> directory;
+                strcpy(command, "touch ");
+                strcat(command, directory);
+                system(command);
+                bzero(command, SIZEOFBUFFER);
 
         } else if (strcmp(command, "quit") == 0) {
             ftp.quit();

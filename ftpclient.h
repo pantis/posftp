@@ -34,6 +34,7 @@ public:
     void cd(char* command);
     void mkdir(char* directory);
     void rmdir(char *directory);
+    void dele(char *directory);
 private:
     int sock_conn;
     int sock_data;
