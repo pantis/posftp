@@ -151,9 +151,24 @@ void ftpclient::mkdir(char *directory) {
     get_reply(sock_conn);
 }
 
+void ftpclient::rmdir(char *directory) {
+    char cmd[SIZEOFBUFFER];
+    strcpy(cmd, "RMD ");
+    strcat(cmd, directory);
+    strcat(cmd, "\r\n");
+
+    send_request(sock_conn, cmd);
+
+    get_reply(sock_conn);
+
+}
+
+
 ftpclient::ftpclient() {
 }
 
 ftpclient::~ftpclient() {
 }
+
+
 

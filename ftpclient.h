@@ -33,6 +33,7 @@ public:
     void ls();
     void cd(char* command);
     void mkdir(char* directory);
+    void rmdir(char *directory);
 private:
     int sock_conn;
     int sock_data;
