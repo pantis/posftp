@@ -34,8 +34,6 @@ void ftpclient::socket_create(int &sock, const char *server_ip_add, const unsign
     }
 }
 
-
-
 void ftpclient::get_reply(int sock) {
     bzero(reply_msg, SIZEOFBUFFER);
     int rep_length;
@@ -50,8 +48,8 @@ void ftpclient::login(const char *server_ip_add, const unsigned int server_port)
 
     char usrCmd[SIZEOFBUFFER];
     char passCmd[SIZEOFBUFFER];
-    char username[1024] = "anonymous";
-    char password[1024] = "";
+    char username[1024] = "ftp_student";
+    char password[1024] = "st123ftp";
 
     socket_create(sock_conn, server_ip_add, server_port);
 
@@ -203,11 +201,18 @@ void ftpclient::get(char *file) {
 
     socket_create(sock_data, ip_add, port);
 
-    send_request(sock_conn, "NLST\r\n");
+    char cmd[SIZEOFBUFFER];
+    strcpy(cmd, "RETR ");
+    strcat(cmd, file);
+    strcat(cmd, "\r\n");
+
+    send_request(sock_conn, cmd);
 
     get_reply(sock_conn);
 
-    get_reply(sock_data);
+    recieve_file(sock_data, file);
+
+    close(sock_data);
 
     get_reply(sock_conn);
 }
@@ -223,8 +228,23 @@ void ftpclient::send_file(int sock, char *file) {
     bzero(buffer, SIZEOFBUFFER);
 }
 
+void ftpclient::recieve_file(int sock, char *file) {
+    bzero(reply_msg, SIZEOFBUFFER);
+    int req_length;
+    ofstream temp(file);
+    req_length = recv(sock, reply_msg, SIZEOFBUFFER, 0);
+    if( req_length < 0 ) {
+        cout << "Recievefile failed" << endl;
+    }
+    temp.write(reply_msg, strlen(reply_msg));
+}
+
+
 ftpclient::ftpclient() {
 }
 
 ftpclient::~ftpclient() {
 }
+
+
+

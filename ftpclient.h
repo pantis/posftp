@@ -39,7 +39,7 @@ public:
     void put(char *file);
     void get(char *file);
     void send_file(int sock,  char *file);
-    void recieve_file(int sock);
+    void recieve_file(int sock, char *file);
 private:
     int sock_conn;
     int sock_data;
