@@ -23,23 +23,41 @@ using namespace std;
 class ftpclient {
 public:
     ftpclient();
+
     ~ftpclient();
-    void socket_create(int &sock, const char* server_ip_add, const unsigned int server_port);
-    void send_request(int sock, const char* command);
+
+    void socket_create(int &sock, const char *server_ip_add, const unsigned int server_port);
+
+    void send_request(int sock, const char *command);
+
     void get_reply(int sock);
+
     void login(const char *server_ip_add, const unsigned int server_port);
+
     void quit();
+
     void pwd();
-    void pasvMode(char* ip_add, int* port);
+
+    void pasvMode(char *ip_add, int *port);
+
     void ls();
-    void cd(char* command);
-    void mkdir(char* directory);
+
+    void cd(char *command);
+
+    void mkdir(char *directory);
+
     void rmdir(char *directory);
+
     void dele(char *directory);
+
     void put(char *file);
+
     void get(char *file);
-    void send_file(int sock,  char *file);
+
+    void send_file(int sock, char *file);
+
     void recieve_file(int sock, char *file);
+
 private:
     int sock_conn;
     int sock_data;
