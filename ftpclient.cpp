@@ -48,15 +48,15 @@ void ftpclient::login(const char *server_ip_add, const unsigned int server_port)
 
     char usrCmd[SIZEOFBUFFER];
     char passCmd[SIZEOFBUFFER];
-    char username[1024] = "ftp_student";
-    char password[1024] = "st123ftp";
+    char username[1024] = "";
+    char password[1024] = "";
 
     socket_create(sock_conn, server_ip_add, server_port);
 
     get_reply(sock_conn);
 
-//    cout << "Enter your username: ";
-//    cin >> username;
+    cout << "Enter your username: ";
+    cin >> username;
     strcpy(usrCmd, "USER ");
     strcat(usrCmd, username);
     strcat(usrCmd, "\r\n");
@@ -66,8 +66,8 @@ void ftpclient::login(const char *server_ip_add, const unsigned int server_port)
     get_reply(sock_conn);
 
     if (strcmp(username, "anonymous") != 0) {
-//        cout << "Enter your password: ";
-//        cin >> password;
+        cout << "Enter your password: ";
+        cin >> password;
         strcpy(passCmd, "PASS ");
         strcat(passCmd, password);
         strcat(passCmd, "\r\n");

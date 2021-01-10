@@ -88,22 +88,22 @@ int main(int argc, char *argv[]) {
             ftp.quit();
             exit(0);
         } else if (strcmp(command, "?") == 0) {
-            cout << "pwd zistenie aktualneho praconeho adresara na serveri" << endl;
-            cout << "!pwd zistenie aktualneho praconeho adresara na lokalnom PC" << endl;
-            cout << "cd zmenime aktualny pracovny adresar na serveri" << endl;
-            cout << "!cd zmenime aktualny pracovny adresar na lokalnom PC" << endl;
-            cout << "ls vypise adresarove informacie na serveri" << endl;
-            cout << "!ls vypise adresarove informacie na lokalnom PC" << endl;
-            cout << "mkdir vytvara adresar na serveri" << endl;
+            cout << "pwd    zistenie aktualneho praconeho adresara na serveri" << endl;
+            cout << "!pwd   zistenie aktualneho praconeho adresara na lokalnom PC" << endl;
+            cout << "cd     zmenime aktualny pracovny adresar na serveri" << endl;
+            cout << "!cd    zmenime aktualny pracovny adresar na lokalnom PC" << endl;
+            cout << "ls     vypise adresarove informacie na serveri" << endl;
+            cout << "!ls    vypise adresarove informacie na lokalnom PC" << endl;
+            cout << "mkdir  vytvara adresar na serveri" << endl;
             cout << "!mkdir vytvara adresar na serveri na lokalnom PC" << endl;
-            cout << "rmdir vymaze prazdny adresar na serveri" << endl;
+            cout << "rmdir  vymaze prazdny adresar na serveri" << endl;
             cout << "!rmdir vymaze prazdny adresar na lokalnom PC" << endl;
-            cout << "rm vymaze subor alebo adresar na serveri" << endl;
-            cout << "!rm vymaze subor alebo adresar na lokalnom PC" << endl;
+            cout << "rm     vymaze subor alebo adresar na serveri" << endl;
+            cout << "!rm    vymaze subor alebo adresar na lokalnom PC" << endl;
             cout << "!touch vytvori subor na lokalnom PC" << endl;
-            cout << "put upload suboru na server" << endl;
-            cout << "get download suboru zo servera" << endl;
-            cout << "quit zastavi aplikaciu" << endl;
+            cout << "put    upload suboru na server" << endl;
+            cout << "get    download suboru zo servera" << endl;
+            cout << "quit   zastavi aplikaciu" << endl;
         }
     }
 
